@@ -1,0 +1,248 @@
+*{
+    margin:0;
+    padding:0;
+    font-family:Tahoma,sans-serif;
+    box-sizing:border-box;
+}
+body {
+
+    background: url(../images/the-milky-way-from-mauna-kea-wallpaper-for-1366x768-67-1133.jpg)repeat 0px 0px; 
+    background-size:cover;
+}
+.main{
+    width:100%;
+    height:auto;
+}
+.main .detils{
+    width:610px;
+    height:auto;
+    float:left
+}
+.detils .Image {
+    height:190px;
+}
+.detils .Image {
+    width: 230px;
+    margin-top: 35px;
+    margin-left: 100px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all .3s ease;
+    text-decoration: none;
+}
+
+.Image:hover {
+    background-color: rgba(0,0,0,.5);
+    z-index: 10000;
+    color: #fff;
+    transition: all .3s ease;
+    text-decoration: none;
+}
+
+.Image span {
+    display: inline-block;
+    padding-top: 4.5em;
+    padding-bottom: 4.5em;
+}
+.detils .info{
+    width:400px;
+    height:100px;
+    margin-top:130px;
+}
+.info h1{
+    font-size: 3em;
+    text-align: center;
+    color: #fff;
+   padding:5px;
+
+}
+.info p{
+    font-size: 2em;
+    text-align: center;
+    color: #fff;
+   padding:5px;
+}
+.main .data{
+    margin:35px;
+    width:450px;
+    height:550px;
+    float:right;
+    /*background-color:aqua;*/
+        -webkit-box-shadow: 0px 0px 50px #333;
+	-moz-box-shadow: 0px 0px 50px #333;
+	-o-box-shadow: 0px 0px 50px #333;
+	-ms-box-shadow: 0px 0px 50px #333;
+	box-shadow: 0px 0px 50px #333;
+    transition: -webkit-box-shadow -moz-box-shadow -o-box-shadow -ms-box-shadow 3s;
+}
+.main .data:hover{
+         -webkit-box-shadow: 0px 0px 110px #333;
+	-moz-box-shadow: 0px 0px 110px #333;
+	-o-box-shadow: 0px 0px 110px #333;
+	-ms-box-shadow: 0px 0px 110px #333;
+	box-shadow: 0px 0px 110px #333;
+}
+.data .data-info{
+
+
+    margin-top:100px;
+    margin-left:10px;
+}
+.data-info .name{
+    outline: none;
+    font-size: 1em;
+    color: #000;
+    padding: .6em;
+    margin: 0;
+    width: 95%;
+    border: none;
+    -webkit-appearance: none;
+    display: block;
+    background: #fff;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+	-o-border-radius: 2px;
+	-ms-border-radius: 2px;
+    border-radius: 2px;
+    margin-bottom:10px;
+}
+.data-info .gander{
+    font-size: 1em;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font:bolder;
+    width: 95%;
+        padding: .6em;
+    margin: 0;
+    border: none;
+        -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+	-o-border-radius: 2px;
+	-ms-border-radius: 2px;
+    border-radius: 2px;
+}
+.data-info p {
+    color: #fff;
+}
+.data .next {
+    margin-top:80px;
+    float:right;
+     width:200px;
+      margin-right:10px;
+}
+.next .btn{
+   
+        font-size: 1em;
+    color: #fff;
+    background: #E91E63;
+    border: 1px solid #E91E63;
+    outline: none;
+    cursor: pointer;
+    padding: .6em 1em;
+    -webkit-appearance: none;
+    width: 100%;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px; 
+   
+}
+
+.next .btn:hover{
+        background: transparent;
+    color: #E91E63;  
+	transition: 0.5s all ;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+.profile-pic {
+
+    height: 150px;
+    width: 150px;
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    color: transparent;
+    transition: all .3s ease;
+    text-decoration: none;
+}
+
+.profile-pic:hover {
+    background-color: rgba(0,0,0,.5);
+    z-index: 10000;
+    color: #fff;
+    transition: all .3s ease;
+    text-decoration: none;
+  cursor: pointer;
+}
+
+.profile-pic span {
+    display: inline-block;
+    padding-top: 4.5em;
+    padding-bottom: 4.5em;
+}
+
+.a7a{
+        margin-top: 35px;
+	    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    vertical-align: middle;
+    text-align: center;
+    width: 230px;
+     height:200px;
+    margin-top: 35px;
+    margin-left: 100px;
+	
+	     transition: all .3s ease;
+    text-decoration: none;
+}
+.a7a:hover {
+    background-color: rgba(0,0,0,.5);
+    z-index: 10000;
+    color: #fff;
+    transition: all .3s ease;
+    text-decoration: none;
+  cursor: pointer;
+}
+.a7a .imgclass{
+	padding:5px;
+    width: 230px;
+     height:200spx;
+	position: relative;
+}
+.a7a .imgclass:hover{
+    background-color: rgba(0,0,0,.5);
+    z-index: 10000;
+    color: #fff;
+    transition: all .3s ease;
+    text-decoration: none;
+  cursor: pointer;
+  overflow:hidden;
+  
+}
+.imgclass img{
+	width:210px;
+	height:210px;
+	background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+
+}
+.imgclass h1 {
+	display:none;
+   position: absolute; 
+   top: 100px; 
+   left: 0; 
+   width: 100%; 
+	color:#fff;
+	
+}

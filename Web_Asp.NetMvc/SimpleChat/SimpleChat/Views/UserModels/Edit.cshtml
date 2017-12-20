@@ -1,0 +1,102 @@
+﻿@using SimpleChat.Models
+@model UserView
+@{
+    ViewBag.Title = "Edit";
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+    addEventListener("load", function ()
+    { setTimeout(hideURLbar, 0); }, false);
+    function hideURLbar()
+    { window.scrollTo(0, 1); }
+</script>
+<script src="~/Scripts/jquery-3.2.1.min.js" type="text/javascript"></script>
+<link href="~/Content/edit-style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Arsenal:400,400i,700,700i" rel="stylesheet">
+
+@using (Html.BeginForm("Edit", "UserModels", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="main">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+        <div class="detils">
+
+            <div class="a7a">
+                <div class="imgclass" id="teto">
+                    <input type='file' id="imgInp" onchange="readURL(this);" style="display:none" name="ImageFile" />
+                    <img id="imgoo" onclick="openFileOption();return;" onchange="readURL(this);"  src="@Url.Content(Model.ProfileImage)"  />
+                    <h1 id="pp">Select Image</h1>
+                </div>
+
+            </div>
+            @*<div class="info">
+                <h1>Welecome!</h1>
+                <p>In The Best Place To Connect With Others. Esay Use & Great Perfomence.</p>
+            </div>*@
+        </div>
+        <div class="data">
+            <div class="data-info">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <p>First Name </p>
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "name", autocomplete = "off" } })
+                @*<input type="text" class="name" name="FirstName" autocomplete="off" />*@
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+                <p>Last Name</p>
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "name", autocomplete = "off" } })
+                @*<input type="text" class="name" name="LastName" autocomplete="off" />*@
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+                <p>Phone</p>
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "name", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+                <p>Status</p>
+                @Html.EditorFor(model => model.Status, new { htmlAttributes = new { @class = "name", autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+
+                <p>Gandar</p>
+                @Html.DropDownListFor(model => model.Gander,
+                    new SelectList(Enum.GetValues(typeof(Gender))),
+                    "Select Gender", new { @class = "gander" })
+                @Html.ValidationMessageFor(model => model.Gander, "", new { @class = "text-danger" })
+                @*<input type="text" class="name" name="Gandar" autocomplete="off" />*@
+            </div>
+            <div class="next">
+                <input type="submit" class="btn" value="Save" />
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        $("#teto").mouseover(function () {
+            $("#imgoo").css("filter", "blur(10px)");
+            $("#pp").show();
+        }).mouseout(function () {
+            $("#imgoo").css("filter", "blur(0px)");
+            $("#pp").hide();
+        });
+        function myOverFunction() {
+            document.getElementById("imgoo").style.filter = "blur(10px)";
+        }
+        function openFileOption() {
+            document.getElementById("imgInp").click();
+        }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    document.getElementById('imgoo').src = e.target.result;
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}

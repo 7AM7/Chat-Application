@@ -1,0 +1,1262 @@
+﻿@{
+    ViewBag.Title = "Chat";
+
+}
+@using Microsoft.AspNet.Identity;
+@using SimpleChat.Models;
+
+<link href="~/Content/chat-style.css" rel="stylesheet" type="text/css" />
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<h1 hidden id="pic">@(ViewBag.Pic)</h1>
+<h1 hidden id="name">@(ViewBag.Name)</h1>
+
+<script>
+
+
+</script>
+<style>
+        .div1 {
+            float: right;
+            background-color: #30b7af;
+            width: 250px;
+            height: 670px;
+            position: relative;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+            .div1::-webkit-scrollbar {
+                width: 10px;
+            }
+
+            .div1::-webkit-scrollbar-thumb {
+                border-radius: 5px;
+                background: rgba(0,0,0,.1);
+            }
+
+        #div2 {
+            position: absolute;
+            width: 250px;
+            height: 80px;
+            background-color: #26333b;
+        }
+
+        #imgdiv2{
+            width: 60px;
+            height: 50px;
+            border-radius: 70%;
+            margin-left: 10px;
+            margin-top: 10px;
+            position: absolute;
+        }
+
+
+        #h4div2 {
+            margin-left: 80px;
+            position: absolute;
+            color: white;
+        }
+
+        #h4_1_div2 {
+            position: absolute;
+            margin-left: 100px;
+            margin-top: 50px;
+            color: white;
+        }
+
+        .div3 {
+            width: 250px;
+            height: 60px;
+            background-color: #19a0d3;
+            margin-top: 80px;
+            position: absolute;
+        }
+
+        #h4div3 {
+            position: absolute;
+            margin-left: 100px;
+            color: white;
+        }
+
+        .ul1_div1 {
+            margin-top: 150px;
+        }
+            .leftdiv {
+                float: left;
+                background-color: #26333B;
+                width: 100px;
+                height: 670px;
+                padding-left:19px;
+            }
+
+            .info {
+                color: wheat;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+
+            .item:hover {
+                opacity: 0.5;
+                cursor: pointer;
+            }
+            .Acceptbtn{
+                margin-top:1px;
+        border: 1px outset blue;
+        background-color: lightBlue;
+        height:30px;
+        width:50px;
+        cursor:pointer;
+        position:absolute;
+            margin-left: 100px;
+            margin-top: 50px;
+    }
+    .Deletebtn
+    {
+                margin-top:1px;
+        border: 1px outset blue;
+        background-color: lightBlue;
+        height:30px;
+        width:50px;
+        cursor:pointer;
+         position:absolute;
+            margin-left: 170px;
+            margin-top: 50px;
+    }
+    .Acceptbtn:hover {
+       background-color: #19a0d3;
+        color:white;
+    }
+    .Deletebtn:hover{
+           background-color: #ff0000;
+        color:white;
+    }
+        #frinfo {
+            position: absolute;
+            width: 250px;
+            height: 80px;
+            background-color: #26333b;
+
+        }
+
+        .lifr{
+            margin-bottom:70px;
+                color:white;
+        }
+       #frinfo:hover {
+          background-color: #26334b;
+    }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .card {
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+                animation-name: animatetop;
+        animation-duration: 0.4s
+        }
+        .grpName{
+                width: 100%;
+                height:40px;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 3px solid #ccc;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+           color:#000;
+       font-size:20px;
+        }
+            .grpName:focus {
+                 border: 3px solid #555;
+
+        }
+            .onelistFr{
+                height:auto;
+                width:100%;
+            }
+            .onelistFr{
+                height:50px;
+                margin-bottom:10px;
+
+            }
+
+            .onelistFrInfo{
+                float:left;
+                            margin-bottom:10px;
+            }
+             .onelistFrInfo .checkboxx
+            {
+            margin-top: 30px;
+            margin-left:280px;
+            float:right;
+           position: absolute;
+        }
+        .createGroupBtn {
+            border: none;
+            outline: 0;
+            display: inline-block;
+            padding: 8px;
+            color: white;
+            background-color: #000;
+            text-align: center;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+            margin-top:10px;
+        }
+            .createGroupBtn:hover {
+                opacity: 0.7;
+            }
+          .card  .imgclass{
+              height:100%;
+        width: 100%;
+        position: relative;
+    }
+    .imgclass:hover{
+        background-color: rgba(0,0,0,.5);
+        z-index: 10000;
+        color: #fff;
+        transition: all .3s ease;
+        text-decoration: none;
+      cursor: pointer;
+      overflow:hidden;
+
+    }
+    .imgclass img{
+      width: 100%;
+        background-size: cover;
+        background-position: center;
+        background-blend-mode: multiply;
+
+    }
+    .imgclass h1 {
+        display:none;
+       position: absolute;
+       top: 100px;
+       left: 0;
+       width: 100%;
+        color:#fff;
+
+    }
+        .groupdiv {
+            display: inline-block;
+            width: 250px;
+            height: 80px;
+
+        }
+            .groupdiv .groupimg{
+            width: 60px;
+            height: 50px;
+            margin-left: 10px;
+            position: absolute;
+            float:left;
+        }
+            .groupdiv h3{
+                color:white;
+                float:right;
+                margin-left:100px;
+                margin-top:9px;
+                position: absolute;
+            }
+            .chatbox #imgDelete{
+                float:right;
+            }
+            .a{
+                display:none;
+            }
+            #frBtn {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    
+}
+                    #AddFriendModel .card {
+                        height:200px;
+            background-color: white;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            max-width: 300px;
+            margin: auto;
+            text-align: center;
+                animation-name: animatetop;
+        animation-duration: 0.4s
+        }
+        @@keyframes animatetop {
+            from {
+                top: -300px;
+                opacity: 0;
+            }
+
+            to {
+                top: 0;
+                opacity: 1;
+            }
+
+        }
+</style>
+<div class="leftdiv">
+    <ul style="list-style-type:none">
+
+        <li>
+            <div class="item" id="myBtn">
+                <img class="imgmsg" src="~/Images/group.png" alt="Message" align="middle">
+                <h5 class="info">New Group</h5>
+            </div>
+        </li>
+
+        <li>
+            @{
+                UserContext db = new UserContext();
+                var email = User.Identity.GetUserName();
+                var profileid = db.UserModels.FirstOrDefault(x => x.UserName == email).Id;
+
+            }
+            @if (profileid > 0)
+            {
+            @Html.ActionLink("Edit", "../UserModels/Edit", new { id = profileid }, new { id = "profile", @class = "a" });
+            }
+            <div class="item">
+                <a href="javascript:document.getElementById('profile').click()">
+                    <img class="imgmsg" src="~/Images/settings.png" alt="Message" align="middle">
+                    <h5 class="info">Profile</h5>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div class="item" id="newfR">
+                <img class="imgmsg" src="~/Images/add.png" alt="Message" align="middle">
+                <h5 class="info">New Friend</h5>
+            </div>
+        </li>
+
+
+
+        @if (Request.IsAuthenticated)
+        {
+            using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-left" }))
+            {
+        @Html.AntiForgeryToken()
+        <li>
+
+            <div class="item">
+                <a href="javascript:document.getElementById('logoutForm').submit()">
+                    <img class="imgmsg" src="~/Images/logout.png" alt="Message" align="middle">
+                    <h5 class="info">Logout</h5>
+                </a>
+            </div>
+        </li>
+            }
+        }
+    </ul>
+</div>
+<div class="div1">
+    <h5 hidden id="myid">@User.Identity.GetUserId().ToString()</h5>
+    <div id="div2">
+        <img src="@ViewBag.Pic.Replace("~", "..")" id="imgdiv2" class="myimg" />
+        <h4 id="h4div2">@ViewBag.FullName</h4>
+        <h4 id="email">@ViewBag.Name</h4>
+        <h4 id="h4_1_div2">online</h4>
+    </div>
+    <div class="div3">
+        <h4 id="h4div3">Friends</h4>
+    </div>
+    <ul class="ul1_div1">
+        @{
+            if (ViewBag.Friends.Count > 0)
+            {
+                foreach (var item in ViewBag.Friends)
+                {
+
+                    <li class="lifr" id="lifr" onclick="ahmed(this)">
+                        <div id="frinfo">
+                            <img src="@item.ProfileImage.Replace("~", "..")" id="imgdiv2" />
+                            <a id="h4div2">
+                                <h5>@item.FullName</h5>
+                                <h3 hidden id="requestuserid">@item.Id</h3>
+                                <h4 hidden id="requestuseremail">@item.Email</h4>
+                            </a>
+                        </div>
+                    </li>
+                }
+            }
+            else
+            {
+                <li class="lifr">No Friends</li>
+            }
+        }
+    </ul>
+    <div class="div3">
+        <h4 id="h4div3">Pending Friends</h4>
+    </div>
+    <ul class="ul1_div1" id="ul1_div1">
+        @{
+            if (ViewBag.PendingFriends.Count > 0)
+            {
+
+                foreach (var item in ViewBag.PendingFriends)
+                {
+                    <li class="lifr">
+                        <div id="frinfo">
+                            <img src="@item.ProfileImage.Replace("~", "..")" id="imgdiv2" />
+                            <h5 id="h4div2">@item.FullName</h5>
+
+
+
+                            <button id="Acceptbtn" class="Acceptbtn" onclick="Accept(this)">
+                                Accept
+                                <h5 hidden id="requestuserid">@item.Id</h5>
+                            </button>
+                            <button id="Deletebtn" class="Deletebtn" onclick="Delete(this)">
+                                Delete
+                                <h5 hidden id="requestuserid">@item.Id</h5>
+                            </button>
+                        </div>
+
+                    </li>
+                }
+            }
+            else
+            {
+
+                <li class="lifr">No Pending Friends</li>
+            }
+        }
+    </ul>
+    <div class="div3" style="margin-top:10px;">
+        <h4 id="h4div3">Groups</h4>
+    </div>
+    <ul class="ul1_div1" id="groupList">
+    @{
+        if (ViewBag.Groups.Count > 0)
+        {
+            foreach (var item in ViewBag.Groups)
+            {
+
+                <li class="lifr" id="lifr" onclick="group(this)">
+                    <div id="frinfo">
+                        <img src="@item.GroupImage.Replace("~", "..")" id="imgdiv2" />
+                        <a id="h4div2">
+                            <h5>@item.GroupName</h5>
+                        </a>
+                    </div>
+                </li>
+                }
+            }
+        }
+</ul>
+</div>
+
+<div class="chatte">
+</div>
+
+
+<div id="AddFriendModel" class="modal">
+
+    <div class="card">
+        <h1>Friend Name</h1>
+        <input class="form-control" id="searchInput" style="margin-left:10px;" />
+    </div>
+</div>
+<div id="detilmyModal" class="modal">
+    <span class="close">&times;</span>
+    <div id="content" class="card">
+    </div>
+</div>
+
+
+        <div id="myModal" class="modal">
+
+            <div class="card">
+
+                <div class="imgclass" id="teto">
+                    <input type='file' id="imgInp" onchange="readURL(this);" style="display:none" name="ImageFile" />
+                    <img id="imgoo" class="imgdiv2" src="../Images/FB_IMG_1472642083991.jpg" onclick="openFileOption();return;" onchange="readURL(this);" />
+                    <h1 id="pp">Select Image</h1>
+                </div>
+                <h1>Group Name</h1>
+                <input id="grpName" class="grpName" type="text" />
+                <ul class="listFr" id="listFr">
+                    @{
+                        if (ViewBag.Friends.Count > 0)
+                        {
+                            foreach (var item in ViewBag.Friends)
+                            {
+                                <li class="onelistFr" id="onelistFr">
+                                    <div id="onelistFrInfo" class="onelistFrInfo">
+                                        <img src="@item.ProfileImage.Replace("~", "..")" id="imgdiv2" />
+                                        <input id="checkboxx" class="checkboxx" type="checkbox" />
+                                        <div id="h4div2" style="color:black;">
+                                            <h5 id="grusername">@item.FullName</h5>
+                                            <h3 hidden id="grrequestuserid">@item.Id</h3>
+                                            <h4 hidden id="grrequestuseremail">@item.Email</h4>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+                        else
+                        {
+                            <li class="lifr">No Friends</li>
+                        }
+                    }
+                </ul>
+                <p hidden><button class="createGroupBtn" hidden  id="imageupload">Create</button></p>
+                <p><button class="createGroupBtn" id="createGroupBtn">Create</button></p>
+            </div>
+
+        </div>
+
+        <input id="hdId" type="hidden" />
+        @section scripts {
+            <script src="/Scripts/jquery-1.8.2.min.js"></script>
+            <link rel="stylesheet" href="/Content/JQueryUI/themes/base/jquery.ui.all.css" />
+            <script src="/Scripts/ui/jquery.ui.core.js"></script>
+            <script src="/Scripts/ui/jquery.ui.widget.js"></script>
+            <script src="/Scripts/ui/jquery.ui.mouse.js"></script>
+            <script src="/Scripts/ui/jquery.ui.draggable.js"></script>
+            <script src="/Scripts/ui/jquery.ui.resizable.js"></script>
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+            <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+            <script src="~/Scripts/jquery.signalR-2.2.0.min.js"></script>
+            <script src="~/signalr/hubs"></script>
+
+            <script type="text/javascript">
+
+
+
+                //function Mygroup() {
+                //    var test = '';
+                //    $("#groupList").empty();
+                //    $.ajax({
+                //        url: '/Chat/MyGroup',
+                //        type: 'GET',
+                //        success: function (data) {
+
+                //            $.each(data, function (i, item) {
+                //                test += '<li class="lifr" id="lifr" onclick="group(this)">' +
+                //                    '<div id="frinfo">' +
+                //                     '<img src="' + item.GroupImage.replace("~", "..") + '" id="imgdiv2" />' +
+                //                        '<a id="h4div2" >' +
+
+                //                           ' <h5>' + item.GroupName + '</h5>' +
+                //                       ' </a>' +
+                //                    '</div>' +
+                //               ' </li>"';
+
+                //               // console.log(item.GroupName);
+                //            });
+                //            $("#groupList").append(test);
+
+                //        },
+                //        error: function (error) {
+                //            // $(this).remove();
+                //            console.log(error.statusText);
+                //        }
+                //    });
+                //}
+                //  ---------------Friend-------------------//
+
+                var itemId = $('#requestuserid').text();
+                var Accept = function (c) {
+                    var myvalue = $(c).find('h5').text();
+
+                    var data = {
+                        FromUserId: myvalue,
+                        ToUserId: $("#myid").text(),
+                        Status: 0,
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: '/Home/AcceptFriend',
+                        content: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: data,
+                        success: function (d) {
+                            //console.log(d);
+                            if (d == "Done") {
+                                //$('#frBtn').text("Request Pending");
+                                // $("#frBtn").attr("disabled", true);
+                            }
+                            alert(d);
+
+                        },
+                        error: function (xhr, status, error) {
+                            alert("Error");
+                        }
+                    });
+                }
+
+                var loadMesgCount = 10;
+                var topPosition = 0;
+                var refreshId = null;
+                var tousername = "";
+                var touseremail = ""
+                var touserid = "";
+                var myemail = "";
+
+                $(function () {
+                    clearInterval(refreshId);
+                    // Declare a proxy to reference the hub.
+                    var chatHub = $.connection.chatHub;
+                    $.connection.hub.logging = true;
+                    registerClientMethods(chatHub);
+                   // Mygroup();
+                    // Start Hub
+                    $.connection.hub.start().done(function () {
+                        registerEvents(chatHub)
+                    });
+                });
+
+                function scrollTop(ctrId) {
+                    var height = $('#' + ctrId).find('#chatlogs')[0].scrollHeight;
+                    $('#' + ctrId).find('#chatlogs').scrollTop(height);
+                }
+                function registerEvents(chatHub) {
+                    var name = $("#h4div2").text();
+                    var email = $("#email").text();
+                    if (name.length > 0 && email.length > 0) {
+                        chatHub.server.connect(name, email);
+                        //chatHub.server.connect(name, email);
+                    }
+                    else {
+                        alert("Please login");
+                    }
+                    $("#btnStartChatgrp").click(function () {
+                        // console.log("click");
+                        chatHub.server.joinRoom($("#groupName").val());
+
+                    });
+                    $("#btnEndChat").click(function () {
+                        chatHub.server.onDisconnected(true);
+
+                    });
+                    $("#message").keypress(function (e) {
+                        if (e.which == 13) {
+                            $('#sendmessage').click();
+                        }
+                    });
+                    var $newMessage;
+
+                    //-------group----------//
+                    
+                    var getdata="";
+                    var p = "";
+                    $('#imageupload').click(function () {
+
+                    });
+                    $('#createGroupBtn').click(function () {
+                        var popimg = "";
+                        var groupCreatorEmail = $("#email").text();
+
+                        var groupName = $("#grpName").val();
+
+                        if (window.FormData !== undefined) {
+                            var img = new FormData();
+                            var files = $("#imgInp").get(0).files;
+                            if (files.length > 0) {
+                                img.append("imgInp", files[0]);
+                            }
+                            $.ajax({
+                                type: "POST",
+                                url: '/Chat/UploadGroupImage',
+                                contentType: false,
+                                processData: false,
+                                data: img,
+                                success: function (result) {
+                                    console.log(result);
+                                    if (result.length > 0 && result != "Error" && groupName.length > 0 && groupCreatorEmail.length > 0) {
+                                        console.log(result);
+                                        chatHub.server.createGroup(groupName, result, groupCreatorEmail);
+                                        modal.style.display = "none";
+                                        createGroupChatWindow(chatHub, groupName, result.replace("~", ".."));
+                                    }
+                                    $('#listFr').find('li').each(function () {
+                                        var row = $(this);
+
+                                        if (row.find('#checkboxx').is(':checked')) {
+                                            var useremail = row.find('#grrequestuseremail').text();
+
+                                            if (groupName.length > 0 && useremail.length > 0) {
+                                                chatHub.server.addMemberGroup(groupName, useremail);
+                                            }
+                                        }
+                                    });
+                                },
+
+                                error: function (xhr, status, p3, p4) {
+                                    var err = "Error " + " " + status + " " + p3 + " " + p4;
+                                    if (xhr.responseText && xhr.responseText[0] == "{")
+                                        err = JSON.parse(xhr.responseText).Message;
+                                    console.log(err);
+                                }
+
+                            });
+                        }
+
+
+                    });
+                }
+
+                var ahmed = "";
+                var pallUsers = null;
+                var group = "";
+                var groupImg = "";
+                function registerClientMethods(chatHub) {
+                    chatHub.client.onConnected = function (id, userName, allUsers, messages) {
+                        pallUsers = null;
+                       // console.log(pallUsers);
+                        $('#hdId').val(id);
+                        for (i = 0; i < allUsers.length; i++) {
+                            pallUsers = allUsers;
+                            //console.log(allUsers[i].FullName);
+
+                            // AddUser(chatHub, allUsers[i].ConnectionId, allUsers[i].UserName, allUsers[i].EmailID);
+                        }
+                        // Add Existing Messages
+                        for (i = 0; i < messages.length; i++) {
+                            AddMessage(messages[i].UserName, messages[i].Message);
+                        }
+
+                    }
+                    group = function (h) {
+                       var groupNamee = $(h).find('h5').text();
+                       var groupImg = $(h).find('img').attr('src');
+                        OpenGroupChatWindow(chatHub, groupNamee, groupImg);
+
+                    }
+                    ahmed = function (h) {
+
+                        tousername = $(h).find('h5').text();
+                        touseremail = $(h).find('h4').text();
+                      //  console.log(pallUsers);
+                        for (i = 0; i < pallUsers.length; i++) {
+                            //console.log(pallUsers[i].FullName);
+                            //console.log(touseremail);
+                            if (pallUsers[i].EmailID == touseremail) {
+                                //console.log("1");
+                                touserid = pallUsers[i].ConnectionId;
+                            }
+                        }
+                        // touserid = $(h).find('h3').text();
+                        myemail = $("#email").text();
+                        if (touseremail != myemail) {
+
+                            //console.log(touserid + tousername + touseremail + myemail);
+                            OpenPrivateChatWindow(chatHub, touserid, tousername, touseremail, myemail);
+                            //createPrivateChatWindow(chatHub, windowId, ctrId, fromUserName, userEmail, email);
+                        }
+
+                    }
+
+                    chatHub.client.onNewUserConnected = function (id, name, email) {
+                       // console.log("New userid:" + id + " Name: " + name);
+                    }
+                    // On User Disconnected
+                    chatHub.client.onUserDisconnected = function (id, userName) {
+                        //  $('#' + id).remove();
+
+                        var ctrId = 'private_' + id;
+                        $('#' + ctrId).remove();
+                      //  console.log(userName + " logged off");
+                        var disc = $('<div class="disconnect">"' + userName + '" logged off.</div>');
+                        AddDivToContainer(disc);
+                        $(disc).hide();
+                        $('body').prepend(disc);
+                        $(disc).fadeIn(200).delay(2000).fadeOut(200);
+                    }
+
+                    // On User Disconnected Existing
+                    chatHub.client.onUserDisconnectedExisting = function (id, userName) {
+                        // $('#' + id).remove();
+                        var ctrId = 'private_' + id;
+                        $('#' + ctrId).remove();
+                    }
+                    chatHub.client.messageReceived = function (userName, message) {
+                        //    console.log("Testpublic");
+                        AddMessage(userName, message);
+                    }
+                    chatHub.client.creatGroup = function (groupName) {
+                        console.log("Group Create:"+groupName);
+                    }
+                    chatHub.client.addMemberGroup = function (groupName) {
+                        console.log("Join Group:" + groupName);
+                    }
+                    chatHub.client.addChatMessage = function (groupName, message, fromUsrName, frompic, msgDate) {
+
+                        var ctrId = 'group_' + groupName.replace(" ", "_");
+
+                        console.log("client");
+                        if ($('#' + ctrId).length == 0) {
+                            group = function (h) {
+                                groupName = $(h).find('h5').text();
+                                groupImg = $(h).find('img').attr('src');
+                                createGroupChatWindow(chatHub, groupName, groupImg);
+
+                                chatHub.server.getGroupMessage(groupName, loadMesgCount).done(function (msg) {
+                                    for (i = 0; i < msg.length; i++) {
+                                        console.log(msg[i].message);
+                                        if (msg[i].userName == $("#h4div2").text()) {
+                                            $newMessage = $('<div class="chat friend"><div class="user-photo"><img id="imgeo" src="' + msg[i].Image.replace("~", "..") + '"/> </div> <p class="chat-message"> ' + msg[i].message + ":" + msgDate+ ' </p> </div>');
+                                        } else {
+                                            $newMessage = $('<div class="chat self"><div class="user-photo"><img  id="imgeo" src="' + msg[i].Image.replace("~", "..") + '" />  </div> <p class="chat-message"> ' + msg[i].message + ":" + msgDate + ' </p> </div>');
+                                        }
+                                        $('#' + ctrId).find('#discussion').append($newMessage);
+                                        scrollTop(ctrId);
+                                    }
+                                });
+                            }
+                        }
+                        else {
+                            if (fromUsrName == $("#h4div2").text()) {
+                                $newMessage = $('<div class="chat friend"><div class="user-photo"><img id="imgeo" src="' + frompic.replace("~", "..") + '"/> </div> <p class="chat-message"> ' + message + ":" + msgDate + ' </p> </div>');
+                            } else {
+                                $newMessage = $('<div class="chat self"><div class="user-photo"><img  id="imgeo" src="' + frompic.replace("~", "..") + '" />  </div> <p class="chat-message"> ' + message + ":" + msgDate + ' </p> </div>');
+                            }
+                            $('#' + ctrId).find('#discussion').append($newMessage);
+                            scrollTop(ctrId);
+                        }
+                    }
+                    chatHub.client.sendPrivateMessage = function (windowId, fromUserName, message, userEmail, email, status, fromUserId, msgDate, frompic) {
+
+                        var ctrId = 'private_' + windowId;
+                        if (status == 'Click') {
+                            if ($('#' + ctrId).length == 0) {
+                                ahmed = function (h) {
+                                    touseremail = $(h).find('h4').text();
+                                    myemail = $("#email").text();
+                                    if (touseremail != myemail) {
+
+                                        createPrivateChatWindow(chatHub, windowId, ctrId, fromUserName, userEmail, email);
+                                        chatHub.server.getPrivateMessage(userEmail, email, loadMesgCount).done(function (msg) {
+                                            for (i = 0; i < msg.length; i++) {
+                                                if (msg[i].userName == $("#email").text()) {
+                                                    $newMessage = $('<div class="chat friend"><div class="user-photo"><img id="imgeo" src="' + msg[i].Image.replace("~", "..") + '"/> </div> <p class="chat-message"> ' + msg[i].message + ":" + msg[i].msgData + ' </p> </div>');
+                                                } else {
+                                                    $newMessage = $('<div class="chat self"><div class="user-photo"><img  id="imgeo" src="' + msg[i].Image.replace("~", "..") + '" />  </div> <p class="chat-message"> ' + msg[i].message + ":" + msg[i].msgData + ' </p> </div>');
+                                                }
+                                                $('#' + ctrId).find('#discussion').append($newMessage);
+                                                scrollTop(ctrId);
+                                            }
+                                        });
+                                    }
+                                }
+
+                            }
+
+                            else {
+                                if (fromUserName == $("#h4div2").text()) {
+                                    $newMessage = $('<div class="chat friend"><div class="user-photo"><img id="imgeo" src="' + frompic.replace("~", "..") + '"/> </div> <p class="chat-message"> ' + message + ":" + msgDate + ' </p> </div>');
+                                } else {
+                                    $newMessage = $('<div class="chat self"><div class="user-photo"><img  id="imgeo" src="' + frompic.replace("~", "..") + '" />  </div> <p class="chat-message"> ' + message + ":" + msgDate + ' </p> </div>');
+                                }
+                                $('#' + ctrId).find('#discussion').append($newMessage);
+                                scrollTop(ctrId);
+                            }
+                        }
+
+                        if (status == "Type") {
+                            if (fromUserId == windowId)
+                                $('#' + ctrId).find('#msgTypeingName').text("typing...");
+                        }
+                        else { $('#' + ctrId).find('#msgTypeingName').text(""); }
+                    }
+                }
+
+                function AddMessage(userName, message) {
+                    if (userName == $("#h4div2").text()) {
+                        $newMessage = $('<div class="chat friend"><div class="user-photo"><img id="imgeo" src="../Images/FB_IMG_1472642083991.jpg"/> </div> <p class="chat-message">' + userName + message + ' </p> </div>');
+                    } else {
+                        $newMessage = $('<div class="chat self"><div class="user-photo"><img  id="imgeo" src="../Images/IMG_20161118_190028.jpg" />  </div> <p class="chat-message">' + userName + message + ' </p> </div>');
+                    }
+                    //$newMessage = $('<div class="chat friend"><div class="user-photo"><img id="imgeo" src="~/Images/FB_IMG_1472642083991.jp"/> </div> <p class="chat-message">' + userName + message + ' </p> </div>');
+                    $('#discussion').append($newMessage);
+                    var height = $('#chatlogs')[0].scrollHeight;
+                    $('#chatlogs').scrollTop(height);
+                }
+
+                function OpenPrivateChatWindow(chatHub, id, userName, userEmail, email) {
+
+                    var ctrId = 'private_' + id;
+                    if ($('#' + ctrId).length > 0) return;
+
+                    createPrivateChatWindow(chatHub, id, ctrId, userName, userEmail, email);
+
+                    chatHub.server.getPrivateMessage(userEmail, email, loadMesgCount).done(function (msg) {
+                        for (i = 0; i < msg.length; i++) {
+                            //console.log($("#h4div2").text());
+                            
+                            if (msg[i].userName == $("#email").text()) {
+                                $newMessage = $('<div class="chat friend"><div class="user-photo"><img id="imgeo" src="' + msg[i].Image.replace("~", "..") + '"/> </div> <p class="chat-message"> ' + msg[i].message + ":" + msg[i].msgData + ' </p> </div>');
+                            } else {
+                                $newMessage = $('<div class="chat self"><div class="user-photo"><img  id="imgeo" src="' + msg[i].Image.replace("~", "..") + '" />  </div> <p class="chat-message"> ' + msg[i].message + ":" + msg[i].msgData + ' </p> </div>');
+                            }
+                            $('#' + ctrId).find('#discussion').append($newMessage);
+                            // set scrollbar
+                            scrollTop(ctrId);
+                        }
+                    });
+                }
+                function createPrivateChatWindow(chatHub, userId, ctrId, userName, userEmail, email) {
+                    var div = '    <div id="' + ctrId + '" class="chatbox" >' +
+                              '<img id="imgDelete"  style="cursor:pointer;width:25px;height:25px;" src="/Images/cancel32.png"/>' +
+                                    //  '<h6 style="color:white;">' + userName + '</h6>' +
+                                        '<div class="chatlogs" id="chatlogs">' +
+
+                                           ' <ul id="discussion"></ul>' +
+
+                                       ' </div>' +
+                                       ' <div class="chat-form">' +
+                                          '  <textarea id="txtPrivateMessage"></textarea>' +
+                                           ' <button id="btnSendMessage">Send</button>' +
+                                       ' </div>' +
+                                  '  </div>"';
+
+                    var $div = $(div);
+
+                    $div.find('#imgDelete').click(function () {
+                        $('#' + ctrId).remove();
+                    });
+                    // Send Button event
+                    $div.find("#btnSendMessage").click(function () {
+                        $textBox = $div.find("#txtPrivateMessage");
+                        var msg = $textBox.val();
+                        if (msg.length > 0) {
+                            if (userId == "" || userId == null) {
+                                //console.log(userName + $("#h4div2").text());
+                                if (userName != $("#h4div2").text()) {
+                                    $newMessage = $('<div class="chat friend"><div class="user-photo"><img id="imgeo" src="' + $(".myimg").attr('src') + '"/> </div> <p class="chat-message">' + msg + ' </p> </div>');
+                                } else {
+                                    $newMessage = $('<div class="chat self"><div class="user-photo"><img  id="imgeo" src="' + $(".myimg").attr('src') + '" />  </div> <p class="chat-message">' + msg + ' </p> </div>');
+                                }
+                                $("#private_").find('#discussion').append($newMessage);
+                                //$('#' + ctrId).find('#divMessage').append('<div class="message"><img class="userName" src="' + frompic.replace("~", "..") + '" style="width:30px;height:30px;background:#ccc;border-radius:50%;overflow:hidden;""></span>: ' + message + ":" + msgDate + '</div>');
+                                // set scrollbar
+                                var height = $('#chatlogs')[0].scrollHeight;
+                                $('#chatlogs').scrollTop(height);
+                                chatHub.server.addPrivateMessageinCache(myemail, touseremail, msg);
+
+                            }
+                            else {
+                                chatHub.server.sendPrivateMessage(userId, msg, 'Click');
+                            }
+                            $textBox.val('');
+                        }
+                    });
+                    // Text Box event
+                    $div.find("#txtPrivateMessage").keyup(function (e) {
+                        if (e.which == 13) {
+                            $div.find("#btnSendMessage").click();
+                        }
+
+                        // Typing
+                        $textBox = $div.find("#txtPrivateMessage");
+                        var msg = $textBox.val();
+                        if (msg.length > 0) {
+                            chatHub.server.sendPrivateMessage(userId, msg, 'Type');
+
+                        }
+                        else {
+                            chatHub.server.sendPrivateMessage(userId, msg, 'Empty');
+
+                        }
+
+                        clearInterval(refreshId);
+                        checkTyping(chatHub, userId, msg, $div, 5000);
+                    });
+
+                    clearInterval(refreshId);
+                    AddDivToContainer($div)
+                }
+
+                function checkTyping(chatHub, userId, msg, $div, time) {
+                    refreshId = setInterval(function () {
+                        // Typing
+                        $textBox = $div.find("#txtPrivateMessage");
+                        var msg = $textBox.val();
+                        if (msg.length == 0) {
+                            chatHub.server.sendPrivateMessage(userId, msg, 'Empty');
+                        }
+                    }, time);
+                }
+
+
+                function htmlEncode(value) {
+                    var encodedValue = $('<div />').text(value).html();
+                    return encodedValue;
+                }
+                //-------------------------------------------------GROUP----------------------------//
+                $("#teto").mouseover(function () {
+                    $("#imgoo").css("filter", "blur(10px)");
+                    $("#pp").show();
+                }).mouseout(function () {
+                    $("#imgoo").css("filter", "blur(0px)");
+                    $("#pp").hide();
+                });
+                function myOverFunction() {
+                    document.getElementById("imgoo").style.filter = "blur(10px)";
+                }
+                function openFileOption() {
+                    document.getElementById("imgInp").click();
+                }
+                function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            document.getElementById('imgoo').src = e.target.result;
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                    
+                }
+                var modalfr = document.getElementById('AddFriendModel');
+                // Get the modal
+                var modal = document.getElementById('myModal');
+                var detilmyModal = document.getElementById('detilmyModal');
+
+                // Get the button that opens the modal
+                var btn = document.getElementById("myBtn");
+
+                var checkboxes = document.getElementById("checkboxx");
+                // When the user clicks on the button, open the modal
+                btn.onclick = function () {
+                    modal.style.display = "block";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function (event) {
+                    if (event.target == modal ) {
+                        modal.style.display = "none";
+                        $("#grpName").val("");
+                        document.getElementById('imgoo').src = "../Images/FB_IMG_1472642083991.jpg";
+                        $('#listFr').find('li').each(function () {
+                            var row = $(this);
+                            if (row.find('#checkboxx').is(':checked')) {
+                                row.find('#checkboxx').prop('checked', false);
+                            }
+                        });
+                        
+                    }
+                    if(event.target == modalfr){
+                        modalfr.style.display = "none";
+                        $("#searchInput").val("");
+                    }
+                    if (event.target == detilmyModal) {
+                        detilmyModal.style.display = "none";
+                        $("#searchInput").val("");
+
+                    }
+                }
+                var $newMessagee = "";
+                function OpenGroupChatWindow(chatHub, groupName, groupImg) {
+                    var ctrId = 'group_' + groupName.replace(" ", "_");
+                    if ($('#' + ctrId).length > 0) return;
+
+                    createGroupChatWindow(chatHub, groupName, groupImg);
+                    chatHub.server.getGroupMessage(groupName, loadMesgCount).done(function (msg) {
+                        for (i = 0; i < msg.length; i++) {
+                            console.log("Mess:" + msg[i].userName);
+                            if (msg[i].userName == $("#h4div2").text()) {
+                                $newMessagee = $('<div class="chat friend"><div class="user-photo"><img id="imgeo" src="' + msg[i].Image.replace("~", "..") + '"/> </div> <p class="chat-message"> ' + msg[i].message + ":" + msg[i].msgData + ' </p> </div>');
+                            } else {
+                                $newMessagee = $('<div class="chat self"><div class="user-photo"><img  id="imgeo" src="' + msg[i].Image.replace("~", "..") + '" />  </div> <p class="chat-message"> ' + msg[i].message + ":" + msg[i].msgData + ' </p> </div>');
+                            }
+                            $('#' + ctrId).find('#discussion').append($newMessagee);
+                            // set scrollbar
+                            scrollTop(ctrId);
+                        }
+                    });
+                }
+                function createGroupChatWindow(chatHub, groupName, groupImg) {
+                    var ctrId = 'group_' + groupName.replace(" ", "_");
+                    console.log(groupName.length);
+                    var div = '    <div id="'+ ctrId +'" class="chatbox" >' +
+                         '<img id="imgDelete"  style="cursor:pointer;width:25px;height:25px;" src="/Images/cancel32.png"/>' +
+                                '<div class="groupdiv">' +
+                                      '<img   id="imgeo" class="groupimg" src="' + groupImg + '"/>' +
+                                      '<h3 >'+ groupName +'</h3>' +
+
+                                '</div>' +
+                                        '<div class="chatlogs" id="chatlogs">' +
+
+                                           ' <ul id="discussion"></ul>' +
+
+                                       ' </div>' +
+                                       ' <div class="chat-form">' +
+                                          '  <textarea id="txtGroupMessage"></textarea>' +
+                                           ' <button id="btnSendMessage">Send</button>' +
+                                       ' </div>' +
+                                  '  </div>"';
+
+                    var $div = $(div);
+
+                    $div.find('#imgDelete').click(function () {
+                        console.log("reomve");
+                        $('#' + ctrId).remove();
+                    });
+                    // Send Button event
+                    $div.find("#btnSendMessage").click(function () {
+                        $textBox = $div.find("#txtGroupMessage");
+                        var msg = $textBox.val();
+                        if (msg.length > 0) {
+                            chatHub.server.sendRoomMessage(groupName, msg);
+                            $textBox.val('');
+                        }
+                    });
+                    // Text Box event
+                    $div.find("#txtGroupMessage").keyup(function (e) {
+                        if (e.which == 13) {
+                            $div.find("#btnSendMessage").click();
+                        }
+                    });
+                    AddDivToContainer($div)
+                }
+                //------------------NewFr----------------//
+                
+                $("#newfR").click(function () {
+                    modalfr.style.display = "block";
+                });
+                $("#searchInput").autocomplete({
+                    minLength: 1,
+                    source: function (request, response) {
+                        $.ajax({
+                            url: '/Home/GetSearchValue',
+                            type: "POST",
+                            dataType: "json",
+                            data: { search: $("#searchInput").val() },
+                            success: function (data) {
+                                if (data == "Problem! Check Your Login....") {
+                                    alert("Problem! Check Your Login....");
+                                }
+                                response($.map(data, function (item) {
+                                    return { label: item.FullName, value: item.FullName, avatar: item.ProfileImage, usrid: item.UserId, myId: item.myId, status: item.Status, gander: item.Gander };
+                                }))
+                            },
+                            error: function (xhr, status, error) {
+                                alert("Error");
+                            }
+                        });
+                    },
+                    select: function (event, ui) {
+                        $('#content').empty();
+                        $("#searchInput").val("");
+                        var imge = ui.item.avatar;
+                        imge = imge.replace("~", "..");
+                        var status = "";
+                        var gander = "";
+                        if (ui.item.status != null)
+                            status = ui.item.status;
+                        else
+                            status = "";
+                        if (ui.item.gander == 0)
+                            gander = "Male";
+                        else
+                            gander = "Female";
+                        var inner_html = '<img src="' + imge + '" alt="' + ui.item.avatar + '" style="width:100%;max-height:300px;"><h1>' + ui.item.label + '</h1><p class="title" id="fromuserid">' + "Status: " + status + '</p><p id="touserid">' + "Gander: " + gander + '</p><a href="#"  ><i style="margin-right:10px;" class="fa fa-dribbble"></i></a><a href="#"><i style="margin-right:10px;" class="fa fa-twitter"></i></a><a href="#"><i style="margin-right:10px;" class="fa fa-linkedin"></i></a><a href="#"><i style="margin-right:10px;" class="fa fa-facebook"></i></a><button id="frBtn" hidden >Request Pending</button>';
+
+                        var data1 = {
+                            FromUserId: ui.item.myId,
+                            ToUserId: ui.item.usrid,
+                        };
+                        $.ajax({
+                            type: "POST",
+                            url: '/Home/CheckingRequest',
+                            content: "application/json; charset=utf-8",
+                            dataType: "json",
+                            data: data1,
+                            success: function (d) {
+
+                                //console.log(d);
+                                $('#frBtn').show();
+                                if (d == "Request Pending") {
+                                    $('#frBtn').text("Request Pending");
+                                    $("#frBtn").attr("disabled", true);
+                                    //$('#content').append('<button id="frBtn"  >Request Pending</button>');
+                                }
+                                else {
+                                    if (d == "Add as friend") {
+                                        $('#frBtn').text("Add as friend");
+                                        //$('#content').append('<button id="frBtn"  >Add as Friend</button>');
+                                    }
+                                    else {
+                                        $('#frBtn').text("UnFriend");
+
+                                        // $('#content').append('<button  id="frBtn" >UnFriend</button>');
+                                    }
+                                }
+                            },
+                            error: function (xhr, status, error) {
+                                alert("Error");
+                            }
+                        });
+
+
+
+                        detilmyModal.style.display = "block";
+
+                        $('#content').append(inner_html);
+                        $('#frBtn').click(function () {
+                            var data = {
+                                FromUserId: ui.item.myId,
+                                ToUserId: ui.item.usrid,
+                                Status: 0,
+                            };
+                            $.ajax({
+                                type: "POST",
+                                url: '/Home/AddFriend',
+                                content: "application/json; charset=utf-8",
+                                dataType: "json",
+                                data: data,
+                                success: function (d) {
+                                   // console.log(d);
+                                    if (d == "Request Sent!") {
+
+                                        $('#frBtn').text("Request Pending");
+                                        $("#frBtn").attr("disabled", true);
+                                    }
+                                    alert(d);
+
+                                },
+                                error: function (xhr, status, error) {
+                                    alert("Error");
+                                }
+                            });
+                        });
+
+                        return false;
+                    },
+
+                });
+                function AddDivToContainer($div) {
+                    $('.chatte').prepend($div);
+                }
+
+            </script>
+        }
+
+
+
+
+

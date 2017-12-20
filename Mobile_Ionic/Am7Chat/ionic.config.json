@@ -1,0 +1,8 @@
+{
+  "name": "Am7Chat",
+  "app_id": "e387ed7b",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

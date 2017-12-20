@@ -1,0 +1,18 @@
+.leftdiv {
+    float: left;
+    background-color: #26333B;
+}
+
+.info {
+    color: wheat;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.item:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+li:last-child {
+    margin-top: 120px;
+}

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<SimpleChat.Models.MyFriends>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<h2>@ViewBag.t</h2>
+@*@foreach (var item in Model)
+{
+    <span>@item.ToUserId</span>
+    <span>@item.Status</span>
+}*@
+@*<h1>@ViewBag.tousrid</h1>
+<h1>@ViewBag.status</h1>*@
+@*<div>
+    <h4>Friends</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FromUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+    </dl>
+</div>*@
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.UserID }) |*@
+    @Html.ActionLink("Back to List", "Index")
+</p>

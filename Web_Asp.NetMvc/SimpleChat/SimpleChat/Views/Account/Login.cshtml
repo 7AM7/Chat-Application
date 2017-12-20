@@ -1,0 +1,68 @@
+﻿@using SimpleChat.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript">
+    addEventListener("load", function ()
+    { setTimeout(hideURLbar, 0); }, false);
+    function hideURLbar()
+    { window.scrollTo(0, 1); }
+ </script>
+
+<link href="~/Content/login-style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="//fonts.googleapis.com/css?family=Cormorant+Garamond:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Arsenal:400,400i,700,700i" rel="stylesheet">
+
+    <div class="main-agileinfo slider ">
+        <div class="items-group">
+            <div class="item agileits-w3layouts">
+                <div class="block text main-agileits">
+                    <span class="circleLight"></span>
+                    <!-- login form -->
+
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                    <div class="login-form loginw3-agile">
+                        <div class="agile-row">
+                            @Html.AntiForgeryToken()
+                            <h1>Log-In</h1>
+                            @Html.ValidationSummary(true, "", new { @class = "ErorrVlad" })
+                            <div class="login-agileits-top">
+
+                                    <p>Email </p>
+                                    @*@Html.TextBoxFor(m => m.Email, new { @class = "name" })*@
+                                    <input type="text" class="name" name="Email"  autocomplete="off" />
+                                     @Html.ValidationMessageFor(m => m.Email, "", new { @class = "ErorrVlad" , autocomplete = "off" })
+                                   
+                                    <p>Password</p>
+                                    @*@Html.PasswordFor(m => m.Password, new { @class = "passwordd" })*@
+                                    <input type="password" class="password" name="Password"    autocomplete="off" />
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "ErorrVlad" })
+                                   
+                                    <label class="anim">
+                                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkboxx" })
+                                        @*<input type="checkbox" class="checkbox">*@
+                                        <span> Remember me ?</span>
+                                    </label>
+                                    <input type="submit" class="login" value="Login">
+
+                            </div>
+                            <div class="login-agileits-bottom wthree" id="sigonip">
+                                        <h6 style="margin-right:100px;"><a href="/Account/Register">SignUp Now!</a></h6>
+                                </div>
+                            </div>
+                    </div>
+                    }
+                </div>
+                
+            </div>
+
+        </div>
+
+    </div>
+
+
